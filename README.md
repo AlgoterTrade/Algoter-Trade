@@ -91,8 +91,6 @@ Before you begin, ensure you have the following installed on your system:
 
 ### Step 1: Clone the Repository
 
-```bash
-<<<<<<< HEAD
 git clone https://github.com/AlgoterTrade/Algoter-Trade.git
 cd Algoter-Trade
 >>>>>>> 84ab03cbf7b1f7f54b7aad13fa34cd13662bd8c6
