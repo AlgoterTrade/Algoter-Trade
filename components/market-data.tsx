@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { LineChart, ArrowUpRight, ArrowDownRight, RefreshCw } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { getMarketData } from "@/lib/binance"
+import { getMarketData } from "@/lib/binance-client"
 
 interface MarketData {
   symbol: string

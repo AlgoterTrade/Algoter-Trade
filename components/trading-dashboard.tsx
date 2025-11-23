@@ -5,7 +5,7 @@ import { ArrowUpRight, ArrowDownRight, RefreshCw, Zap } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
-import { getMarketData, getHistoricalData } from "@/lib/binance"
+import { getMarketData, getHistoricalData } from "@/lib/binance-client"
 import { getAiStrategyAdvice, getMockStrategyAdvice } from "@/lib/openai"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
@@ -44,10 +44,19 @@ export function TradingDashboard() {
   const fetchMarketData = async () => {
     try {
       setRefreshing(true)
+      setError("")
       const data = await getMarketData(["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "ADAUSDT"])
-      setMarketData(data)
+      if (data && data.length > 0) {
+        setMarketData(data)
+        setError("")
+      } else {
+        setError("Failed to fetch market data. Please check your connection and try again.")
+        setMarketData([])
+      }
     } catch (error) {
       console.error("Error fetching market data:", error)
+      setError("Failed to fetch market data. Please check your connection and try again.")
+      setMarketData([])
     } finally {
       setIsLoading(false)
       setRefreshing(false)
@@ -57,9 +66,17 @@ export function TradingDashboard() {
   const fetchHistoricalData = async (symbol: string) => {
     try {
       const data = await getHistoricalData(symbol, "1d", 30)
-      setHistoricalData(data)
+      if (data && data.length > 0) {
+        setHistoricalData(data)
+        setError("")
+      } else {
+        setError("No historical data available. Please try again later.")
+        setHistoricalData([])
+      }
     } catch (error) {
       console.error("Error fetching historical data:", error)
+      setError("Failed to fetch historical data. Please check your connection and try again.")
+      setHistoricalData([])
     }
   }
 
@@ -111,7 +128,9 @@ export function TradingDashboard() {
   const priceChangeColor = priceChange >= 0 ? "text-green-500" : "text-red-500"
 
   // Calculate SMAs using the indicators library
-  const closePrices = historicalData.map((d) => Number.parseFloat(d.close))
+  const closePrices = historicalData.length > 0 
+    ? historicalData.map((d) => Number.parseFloat(d.close))
+    : []
   const sma7Values = calculateSMA(closePrices, 7)
   const sma25Values = calculateSMA(closePrices, 25)
   
@@ -142,15 +161,25 @@ export function TradingDashboard() {
     : "N/A"
   
   // Calculate volume status
-  const volumes = historicalData.map((d) => Number.parseFloat(d.volume))
-  const avgVolume = volumes.reduce((a, b) => a + b, 0) / volumes.length
-  const currentVolume = volumes[volumes.length - 1] || 0
-  const volumeStatus = currentVolume > avgVolume * 1.2 ? "High" : currentVolume < avgVolume * 0.8 ? "Low" : "Normal"
+  const volumes = historicalData.length > 0 
+    ? historicalData.map((d) => Number.parseFloat(d.volume))
+    : []
+  const avgVolume = volumes.length > 0 ? volumes.reduce((a, b) => a + b, 0) / volumes.length : 0
+  const currentVolume = volumes.length > 0 ? volumes[volumes.length - 1] : 0
+  const volumeStatus = volumes.length > 0 
+    ? (currentVolume > avgVolume * 1.2 ? "High" : currentVolume < avgVolume * 0.8 ? "Low" : "Normal")
+    : "N/A"
   
   // Calculate volatility
-  const priceChanges = closePrices.slice(1).map((price, idx) => Math.abs(price - closePrices[idx]) / closePrices[idx])
-  const avgVolatility = priceChanges.reduce((a, b) => a + b, 0) / priceChanges.length
-  const volatilityStatus = avgVolatility > 0.03 ? "High" : avgVolatility < 0.01 ? "Low" : "Normal"
+  const priceChanges = closePrices.length > 1
+    ? closePrices.slice(1).map((price, idx) => Math.abs(price - closePrices[idx]) / closePrices[idx])
+    : []
+  const avgVolatility = priceChanges.length > 0 
+    ? priceChanges.reduce((a, b) => a + b, 0) / priceChanges.length 
+    : 0
+  const volatilityStatus = priceChanges.length > 0
+    ? (avgVolatility > 0.03 ? "High" : avgVolatility < 0.01 ? "Low" : "Normal")
+    : "N/A"
 
   return (
     <div className="space-y-6">
@@ -177,18 +206,36 @@ export function TradingDashboard() {
             </Button>
           </CardHeader>
         <CardContent>
+          {error && (
+            <Alert className="mb-4 bg-yellow-900/20 border-yellow-800 text-yellow-400">
+              <AlertTitle>Warning</AlertTitle>
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          )}
+          {marketData.length === 0 && !isLoading && (
+            <Alert className="mb-4 bg-red-900/20 border-red-800 text-red-400">
+              <AlertTitle>No Data Available</AlertTitle>
+              <AlertDescription>
+                Unable to fetch market data. Please check your internet connection and try refreshing.
+              </AlertDescription>
+            </Alert>
+          )}
           <Tabs defaultValue={selectedSymbol} onValueChange={setSelectedSymbol} className="w-full">
-            <TabsList className="grid grid-cols-5 bg-gray-900/50">
-              {marketData.map((data) => (
-                <TabsTrigger
-                  key={data.symbol}
-                  value={data.symbol}
-                  className="data-[state=active]:bg-teal-500 data-[state=active]:text-black"
-                >
-                  {data.symbol.replace("USDT", "")}
-                </TabsTrigger>
-              ))}
-            </TabsList>
+            {marketData.length > 0 ? (
+              <TabsList className="grid grid-cols-5 bg-gray-900/50">
+                {marketData.map((data) => (
+                  <TabsTrigger
+                    key={data.symbol}
+                    value={data.symbol}
+                    className="data-[state=active]:bg-teal-500 data-[state=active]:text-black"
+                  >
+                    {data.symbol.replace("USDT", "")}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            ) : (
+              <div className="text-gray-400 text-sm mb-4 p-2">Loading market data...</div>
+            )}
 
             <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="bg-gray-900/50 rounded-lg p-3">
