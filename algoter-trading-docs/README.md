@@ -338,7 +338,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🔗 Links
 
-- **Website**: [https://algotertrading.com](https://algotertrading.com)
+- **Website**: [https://algoter.trade](https://algoter.trade)
 - **GitHub**: [AlgoterTrade/Algoter-Trade](https://github.com/AlgoterTrade/Algoter-Trade)
 - **Twitter**: [@algotertrade](https://x.com/algotertrade)
 - **Documentation**: [https://algotertrading.com/docs](https://algotertrading.com/docs)
@@ -349,7 +349,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Need help? We're here for you!
 
-- 📧 **Email**: support@algotertrading.com
+- 📧 **Email**: support@algoter.trade
 - 🐛 **Issues**: [GitHub Issues](https://github.com/AlgoterTrade/Algoter-Trade/issues)
 - 📖 **Documentation**: Check the [GitHub repository](https://github.com/AlgoterTrade/Algoter-Trade) for detailed documentation
 - 🐦 **Twitter**: [@algotertrade](https://x.com/algotertrade)

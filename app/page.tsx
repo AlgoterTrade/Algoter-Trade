@@ -6,7 +6,7 @@ import dynamic from "next/dynamic"
 import { Button } from "@/components/ui/button"
 import { ErrorBoundary } from "@/components/error-boundary"
 
-const MainScene = dynamic(() => import("@/components/main-scene").then(mod => ({ default: mod.MainScene })), {
+const MainScene = dynamic(() => import("@/components/main-scene").then(mod => ({ default: mod.MainScene })).catch(() => null), {
   ssr: false,
   loading: () => null
 })
@@ -34,12 +34,10 @@ export default function Home() {
           </h1>
         </div>
       ) : (
-        <>
-          <ErrorBoundary>
-            <div className="absolute inset-0 z-10">
-              <MainScene />
-            </div>
-          </ErrorBoundary>
+        <ErrorBoundary>
+          <div className="absolute inset-0 z-10">
+            {MainScene && <MainScene />}
+          </div>
 
           <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-4 pointer-events-none">
             <div className="max-w-3xl text-center mb-8">
@@ -163,7 +161,7 @@ export default function Home() {
               </Button>
             </div>
           </div>
-        </>
+        </ErrorBoundary>
       )}
     </main>
   )

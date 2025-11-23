@@ -2,6 +2,7 @@ import type React from "react"
 import "@/app/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster as Sonner } from "@/components/ui/sonner"
+import { AppWrapper } from "@/components/app-wrapper"
 
 export const metadata = {
   title: "Algoter Trading - No-Code Trading Strategy Builder",
@@ -28,8 +29,10 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className="dark">
       <body className="bg-black">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
-          {children}
-          <Sonner />
+          <AppWrapper>
+            {children}
+            <Sonner />
+          </AppWrapper>
         </ThemeProvider>
       </body>
     </html>
