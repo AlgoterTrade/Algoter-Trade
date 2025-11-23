@@ -92,8 +92,13 @@ Before you begin, ensure you have the following installed on your system:
 ### Step 1: Clone the Repository
 
 ```bash
+<<<<<<< HEAD
 git clone https://github.com/AlgoterTrade/Algoter-Trade.git
 cd Algoter-Trade
+=======
+git clone https://github.com/yourusername/algoter-trading-platform.git
+cd algoter-trading-platform
+>>>>>>> 84ab03cbf7b1f7f54b7aad13fa34cd13662bd8c6
 ```
 
 ### Step 2: Install Dependencies
@@ -211,6 +216,7 @@ npm start
 
 ## 📚 Documentation
 
+<<<<<<< HEAD
 ### Available Pages & Features
 
 #### 🏠 Home Page (`/`)
@@ -343,13 +349,25 @@ Comprehensive platform documentation:
 - Twitter Monitor (UI exists, full functionality may require API setup)
 
 For more details, visit the [Docs page](/docs) in the application or check the [GitHub repository](https://github.com/AlgoterTrade/Algoter-Trade).
+=======
+Comprehensive documentation is available in the `algoter-trading-docs` directory:
+
+- **[Installation Guide](./INSTALLATION.md)** - Detailed installation instructions
+- **[Quick Start Guide](./QUICK_START.md)** - Step-by-step getting started tutorial
+- **[Features Documentation](./FEATURES.md)** - Complete feature documentation
+- **[Troubleshooting](./TROUBLESHOOTING.md)** - Common issues and solutions
+>>>>>>> 84ab03cbf7b1f7f54b7aad13fa34cd13662bd8c6
 
 ---
 
 ## 🏗️ Project Structure
 
 ```
+<<<<<<< HEAD
 Algoter-Trade/
+=======
+algoter-trading-platform/
+>>>>>>> 84ab03cbf7b1f7f54b7aad13fa34cd13662bd8c6
 ├── app/                          # Next.js 15 App Router
 │   ├── page.tsx                 # Home page
 │   ├── layout.tsx               # Root layout
@@ -375,9 +393,21 @@ Algoter-Trade/
 │   ├── openai.ts                # OpenAI API integration
 │   ├── backtest-engine.ts       # Backtesting engine
 │   ├── indicators.ts            # Technical indicators
+<<<<<<< HEAD
 │   ├── strategy-templates.ts     # Strategy templates
 │   ├── phantom-wallet.ts        # Phantom wallet integration
 │   └── utils.ts                 # Utility functions
+=======
+│   ├── strategy-templates.ts    # Strategy templates
+│   ├── phantom-wallet.ts        # Phantom wallet integration
+│   └── utils.ts                 # Utility functions
+├── algoter-trading-docs/         # Documentation files
+│   ├── README.md                # This file
+│   ├── INSTALLATION.md          # Installation guide
+│   ├── QUICK_START.md           # Quick start guide
+│   ├── FEATURES.md              # Features documentation
+│   └── TROUBLESHOOTING.md       # Troubleshooting guide
+>>>>>>> 84ab03cbf7b1f7f54b7aad13fa34cd13662bd8c6
 ├── public/                       # Static assets
 │   ├── favicon.svg              # Favicon
 │   └── ...                      # Other static files
@@ -470,9 +500,15 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🔗 Links
 
 - **Website**: [https://algotertrading.com](https://algotertrading.com)
+<<<<<<< HEAD
 - **GitHub**: [AlgoterTrade/Algoter-Trade](https://github.com/AlgoterTrade/Algoter-Trade)
 - **Twitter**: [@algotertrade](https://x.com/algotertrade)
 - **Documentation**: [https://algotertrading.com/docs](https://algotertrading.com/docs)
+=======
+- **Twitter**: [@algotertrade](https://x.com/algotertrade)
+- **Documentation**: [https://algotertrading.com/docs](https://algotertrading.com/docs)
+- **GitHub**: [https://github.com/yourusername/algoter-trading-platform](https://github.com/yourusername/algoter-trading-platform)
+>>>>>>> 84ab03cbf7b1f7f54b7aad13fa34cd13662bd8c6
 
 ---
 
@@ -481,8 +517,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 Need help? We're here for you!
 
 - 📧 **Email**: support@algotertrading.com
+<<<<<<< HEAD
 - 🐛 **Issues**: [GitHub Issues](https://github.com/AlgoterTrade/Algoter-Trade/issues)
 - 📖 **Documentation**: Check the [GitHub repository](https://github.com/AlgoterTrade/Algoter-Trade) for detailed documentation
+=======
+- 🐛 **Issues**: [GitHub Issues](https://github.com/yourusername/algoter-trading-platform/issues)
+- 📖 **Documentation**: Check the [docs](./algoter-trading-docs/) folder
+>>>>>>> 84ab03cbf7b1f7f54b7aad13fa34cd13662bd8c6
 - 🐦 **Twitter**: [@algotertrade](https://x.com/algotertrade)
 
 ---
@@ -509,4 +550,7 @@ Need help? We're here for you!
 ⭐ Star this repo if you find it helpful!
 
 </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 84ab03cbf7b1f7f54b7aad13fa34cd13662bd8c6
