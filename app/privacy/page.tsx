@@ -54,7 +54,7 @@ export default function PrivacyPage() {
             </CardHeader>
             <CardContent>
               <p className="text-gray-300 leading-relaxed">
-                Algoter Trading ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our Platform. Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the Platform.
+                Algoter Trading ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our Platform. This is a client-side application that primarily stores data locally in your browser. Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the Platform.
               </p>
             </CardContent>
           </Card>
@@ -68,60 +68,76 @@ export default function PrivacyPage() {
                 <div>
                   <h3 className="text-white font-semibold mb-2">2.1 Wallet Information</h3>
                   <p className="text-gray-300 leading-relaxed">
-                    When you connect your cryptocurrency wallet (e.g., Phantom wallet), we may collect:
+                    When you connect your cryptocurrency wallet (e.g., Phantom wallet) through our Platform:
                   </p>
                   <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4 mt-2">
-                    <li>Your public wallet address</li>
-                    <li>Transaction history related to Platform usage</li>
-                    <li>Network information (e.g., Solana network)</li>
+                    <li>We only access your public wallet address for display purposes</li>
+                    <li>Wallet connection is handled entirely by your wallet extension</li>
+                    <li>No wallet data is transmitted to our servers</li>
+                    <li>All wallet-related data remains in your browser's local storage</li>
                   </ul>
                   <p className="text-gray-300 leading-relaxed mt-2">
-                    <strong className="text-teal-400">Important:</strong> We do not collect, store, or have access to your private keys or seed phrases. These remain securely stored in your wallet.
+                    <strong className="text-teal-400">Important:</strong> We do not collect, store, transmit, or have access to your private keys, seed phrases, or any sensitive wallet information. All wallet interactions are handled directly by your wallet extension. We never request or receive your private keys.
                   </p>
                 </div>
                 <div>
                   <h3 className="text-white font-semibold mb-2">2.2 Usage Data</h3>
                   <p className="text-gray-300 leading-relaxed">
-                    We automatically collect information when you use the Platform, including:
+                    As a client-side application, we do not actively collect or transmit usage data to our servers. However, standard web technologies may automatically collect:
                   </p>
                   <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4 mt-2">
-                    <li>Browser type and version</li>
-                    <li>Device information</li>
-                    <li>IP address</li>
-                    <li>Pages visited and time spent on pages</li>
-                    <li>Features used and interactions with the Platform</li>
+                    <li>Browser type and version (standard HTTP headers)</li>
+                    <li>IP address (required for web requests, but not stored by us)</li>
+                    <li>Pages visited (stored locally in browser history)</li>
+                    <li>Local storage data (strategies, preferences stored in your browser)</li>
                   </ul>
+                  <p className="text-gray-300 leading-relaxed mt-2">
+                    <strong className="text-teal-400">Note:</strong> All user data (strategies, wallet addresses, preferences) is stored locally in your browser's localStorage and is never transmitted to our servers unless you explicitly export and share your strategies.
+                  </p>
                 </div>
                 <div>
                   <h3 className="text-white font-semibold mb-2">2.3 Strategy Data</h3>
                   <p className="text-gray-300 leading-relaxed">
-                    When you create strategies using our Platform, we may store:
+                    When you create strategies using our Platform:
                   </p>
                   <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4 mt-2">
-                    <li>Strategy configurations and settings</li>
-                    <li>Backtest results and performance metrics</li>
-                    <li>Public strategies you choose to share</li>
+                    <li>Strategy configurations and settings are stored locally in your browser's localStorage</li>
+                    <li>Backtest results and performance metrics are calculated and stored locally</li>
+                    <li>Strategies are private by default and never shared unless you explicitly export them</li>
+                    <li>No strategy data is transmitted to our servers</li>
                   </ul>
+                  <p className="text-gray-300 leading-relaxed mt-2">
+                    You can export your strategies as JSON files, which you can then share or import at your discretion. We do not have access to your strategies unless you explicitly share them.
+                  </p>
                 </div>
                 <div>
                   <h3 className="text-white font-semibold mb-2">2.4 Wallet Tracker Data</h3>
                   <p className="text-gray-300 leading-relaxed">
-                    When you use the Wallet Tracker feature, we may store:
+                    When you use the Wallet Tracker feature:
                   </p>
                   <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4 mt-2">
-                    <li>Wallet addresses you choose to track</li>
-                    <li>Cached wallet information for faster loading</li>
+                    <li>Wallet addresses you choose to track are stored locally in your browser's localStorage</li>
+                    <li>Wallet data is fetched directly from public blockchain APIs (Solscan) in real-time</li>
+                    <li>No wallet data is stored on our servers</li>
+                    <li>All tracked wallet information remains in your browser</li>
                   </ul>
+                  <p className="text-gray-300 leading-relaxed mt-2">
+                    Wallet tracking uses public blockchain data only. We do not have access to private wallet information or transaction details beyond what is publicly available on the blockchain.
+                  </p>
                 </div>
                 <div>
-                  <h3 className="text-white font-semibold mb-2">2.5 Twitter Monitor Data</h3>
+                  <h3 className="text-white font-semibold mb-2">2.5 Third-Party API Data</h3>
                   <p className="text-gray-300 leading-relaxed">
-                    When you use the Twitter Monitor feature, we may store:
+                    Our Platform integrates with third-party services:
                   </p>
                   <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4 mt-2">
-                    <li>Twitter usernames you choose to monitor</li>
-                    <li>Cached tweet data for analysis</li>
+                    <li><strong>Binance API:</strong> We fetch real-time market data directly from Binance. No personal data is shared with Binance.</li>
+                    <li><strong>OpenAI API (Optional):</strong> If you provide an API key, market conditions are sent to OpenAI for AI analysis. Your API key is stored locally and never shared with us.</li>
+                    <li><strong>Solana Blockchain:</strong> We query public blockchain data for wallet tracking. No personal information is collected.</li>
                   </ul>
+                  <p className="text-gray-300 leading-relaxed mt-2">
+                    <strong className="text-teal-400">Important:</strong> API keys (OpenAI, Binance) are stored locally in your browser and are never transmitted to our servers. You are responsible for keeping your API keys secure.
+                  </p>
                 </div>
               </div>
             </CardContent>
@@ -133,18 +149,18 @@ export default function PrivacyPage() {
             </CardHeader>
             <CardContent>
               <p className="text-gray-300 leading-relaxed mb-4">
-                We use the information we collect to:
+                Since this is a client-side application, we use locally stored information to:
               </p>
               <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
-                <li>Provide, maintain, and improve the Platform</li>
-                <li>Process transactions and manage your account</li>
-                <li>Send you technical notices and support messages</li>
-                <li>Respond to your comments and questions</li>
-                <li>Monitor and analyze usage patterns and trends</li>
-                <li>Detect, prevent, and address technical issues</li>
-                <li>Personalize your experience on the Platform</li>
-                <li>Comply with legal obligations</li>
+                <li>Provide and maintain the Platform functionality</li>
+                <li>Store your strategies and preferences locally in your browser</li>
+                <li>Enable features like strategy saving, loading, and exporting</li>
+                <li>Remember your tracked wallets and preferences</li>
+                <li>Improve user experience through local caching</li>
               </ul>
+              <p className="text-gray-300 leading-relaxed mt-4">
+                <strong className="text-teal-400">Note:</strong> We do not process transactions, manage accounts, or send messages as this is a client-side application. All data processing happens locally in your browser.
+              </p>
             </CardContent>
           </Card>
 
@@ -155,22 +171,30 @@ export default function PrivacyPage() {
             <CardContent>
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-white font-semibold mb-2">4.1 Public Information</h3>
+                  <h3 className="text-white font-semibold mb-2">4.1 Data Sharing</h3>
                   <p className="text-gray-300 leading-relaxed">
-                    If you choose to share strategies publicly on the Platform, that information will be visible to all users. We are not responsible for the privacy practices of other users who may view your public content.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="text-white font-semibold mb-2">4.2 Service Providers</h3>
-                  <p className="text-gray-300 leading-relaxed">
-                    We may share your information with third-party service providers who perform services on our behalf, such as:
+                    Since all data is stored locally in your browser:
                   </p>
                   <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4 mt-2">
-                    <li>Cloud hosting providers</li>
-                    <li>Analytics services</li>
-                    <li>Payment processors</li>
-                    <li>Customer support services</li>
+                    <li>We do not share your data with third parties</li>
+                    <li>Strategies are private by default and only shared if you explicitly export and share them</li>
+                    <li>No data is transmitted to our servers</li>
+                    <li>You have full control over your data through browser localStorage</li>
                   </ul>
+                </div>
+                <div>
+                  <h3 className="text-white font-semibold mb-2">4.2 Third-Party Services</h3>
+                  <p className="text-gray-300 leading-relaxed">
+                    The Platform makes requests to third-party APIs for functionality:
+                  </p>
+                  <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4 mt-2">
+                    <li><strong>Binance API:</strong> For real-time market data (no personal data shared)</li>
+                    <li><strong>OpenAI API:</strong> Only if you provide your own API key (your key, your data)</li>
+                    <li><strong>Solana Blockchain APIs:</strong> For public wallet data (public information only)</li>
+                  </ul>
+                  <p className="text-gray-300 leading-relaxed mt-2">
+                    These requests are made directly from your browser. We do not act as an intermediary or store data from these services.
+                  </p>
                 </div>
                 <div>
                   <h3 className="text-white font-semibold mb-2">4.3 Legal Requirements</h3>
@@ -195,24 +219,33 @@ export default function PrivacyPage() {
             <CardContent>
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-white font-semibold mb-2">5.1 Storage</h3>
+                  <h3 className="text-white font-semibold mb-2">5.1 Data Storage</h3>
                   <p className="text-gray-300 leading-relaxed">
-                    Your information is stored on secure servers and may be processed and stored outside of your country of residence. By using the Platform, you consent to the transfer of your information to facilities located outside your jurisdiction.
+                    All your data is stored locally in your browser's localStorage:
+                  </p>
+                  <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4 mt-2">
+                    <li>Strategies are stored in your browser, not on our servers</li>
+                    <li>Tracked wallet addresses are stored locally</li>
+                    <li>Preferences and settings are browser-specific</li>
+                    <li>Data is tied to your browser and device</li>
+                  </ul>
+                  <p className="text-gray-300 leading-relaxed mt-2">
+                    <strong className="text-teal-400">Important:</strong> Clearing your browser data will delete all stored strategies and preferences. We recommend exporting your strategies regularly as backups.
                   </p>
                 </div>
                 <div>
                   <h3 className="text-white font-semibold mb-2">5.2 Security Measures</h3>
                   <p className="text-gray-300 leading-relaxed mb-2">
-                    We implement appropriate technical and organizational security measures to protect your information, including:
+                    Security considerations for this client-side application:
                   </p>
                   <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
-                    <li>Encryption of data in transit and at rest</li>
-                    <li>Regular security assessments and updates</li>
-                    <li>Access controls and authentication</li>
-                    <li>Secure coding practices</li>
+                    <li>All data remains in your browser - no server-side storage</li>
+                    <li>HTTPS encryption for all network requests</li>
+                    <li>No sensitive data (private keys, API keys) is transmitted to our servers</li>
+                    <li>Open-source codebase allows for security audits</li>
                   </ul>
                   <p className="text-gray-300 leading-relaxed mt-2">
-                    However, no method of transmission over the Internet or electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your information, we cannot guarantee absolute security.
+                    <strong className="text-red-400">Warning:</strong> Browser localStorage is not encrypted. Do not store sensitive information. Always keep your wallet private keys and API keys secure. We are not responsible for loss of data stored in browser localStorage.
                   </p>
                 </div>
               </div>
@@ -225,18 +258,17 @@ export default function PrivacyPage() {
             </CardHeader>
             <CardContent>
               <p className="text-gray-300 leading-relaxed mb-4">
-                Depending on your location, you may have certain rights regarding your personal information:
+                Since all your data is stored locally in your browser, you have full control:
               </p>
               <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
-                <li><strong>Access:</strong> Request access to your personal information</li>
-                <li><strong>Correction:</strong> Request correction of inaccurate information</li>
-                <li><strong>Deletion:</strong> Request deletion of your information</li>
-                <li><strong>Portability:</strong> Request transfer of your data</li>
-                <li><strong>Objection:</strong> Object to processing of your information</li>
-                <li><strong>Withdrawal:</strong> Withdraw consent where processing is based on consent</li>
+                <li><strong>Access:</strong> All your data is accessible through browser localStorage or by exporting strategies</li>
+                <li><strong>Deletion:</strong> Clear browser data or delete individual items from localStorage</li>
+                <li><strong>Portability:</strong> Export strategies as JSON files to backup or transfer</li>
+                <li><strong>Control:</strong> You can disconnect your wallet at any time</li>
+                <li><strong>Privacy:</strong> No data is stored on our servers, so there's nothing for us to delete</li>
               </ul>
               <p className="text-gray-300 leading-relaxed mt-4">
-                To exercise these rights, please contact us using the information provided in the Contact section.
+                To delete all data: Clear your browser's localStorage or use browser settings to clear site data. For questions, contact us using the information provided in the Contact section.
               </p>
             </CardContent>
           </Card>
@@ -247,17 +279,17 @@ export default function PrivacyPage() {
             </CardHeader>
             <CardContent>
               <p className="text-gray-300 leading-relaxed mb-4">
-                We use cookies and similar tracking technologies to track activity on our Platform and store certain information. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our Platform.
-              </p>
-              <p className="text-gray-300 leading-relaxed">
-                We use cookies for:
+                We use browser localStorage (not traditional cookies) to store your data locally:
               </p>
               <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4 mt-2">
-                <li>Authentication and session management</li>
-                <li>Remembering your preferences</li>
-                <li>Analyzing Platform usage</li>
-                <li>Improving user experience</li>
+                <li>Strategy configurations and saved strategies</li>
+                <li>Tracked wallet addresses</li>
+                <li>User preferences and settings</li>
+                <li>Session state (wallet connection status)</li>
               </ul>
+              <p className="text-gray-300 leading-relaxed mt-4">
+                <strong className="text-teal-400">Note:</strong> We do not use tracking cookies or analytics cookies. All data storage is for functionality only and remains in your browser. You can clear this data at any time through your browser settings.
+              </p>
             </CardContent>
           </Card>
 
@@ -305,6 +337,7 @@ export default function PrivacyPage() {
               <ul className="space-y-2 text-gray-300">
                 <li>Email: privacy@algotertrading.com</li>
                 <li>Twitter: <a href="https://x.com/algotertrade" target="_blank" rel="noopener noreferrer" className="text-teal-400 hover:underline">@algotertrade</a></li>
+                <li>GitHub: <a href="https://github.com/AlgoterTrade/Algoter-Trade" target="_blank" rel="noopener noreferrer" className="text-teal-400 hover:underline">AlgoterTrade/Algoter-Trade</a></li>
               </ul>
             </CardContent>
           </Card>

@@ -211,14 +211,145 @@ npm start
 
 ## 📚 Documentation
 
-For detailed documentation, please refer to the inline documentation in the codebase and the [GitHub repository](https://github.com/AlgoterTrade/Algoter-Trade).
+### Available Pages & Features
+
+#### 🏠 Home Page (`/`)
+- Landing page with 3D animated background
+- Quick access to all main features
+- Navigation links to all sections
+
+#### 🔐 Login Page (`/login`)
+- Connect Phantom wallet for Solana integration
+- Secure wallet authentication
+- Session management
+
+#### 📐 Strategy Page (`/strategy`)
+- Overview of strategy building concepts
+- Introduction to AlgoBlocks components
+- Links to Studio for actual strategy creation
+
+#### 🎨 Studio (`/studio`)
+The main strategy builder with visual drag-and-drop interface:
+
+**Block Types:**
+- **Indicators**: Moving Average (SMA/EMA), RSI, MACD, Bollinger Bands
+- **Conditions**: Price Above/Below, Crossover, Percent Change
+- **Actions**: Buy, Sell, Set Stop Loss, Set Take Profit
+- **Risk Management**: Position Size, Max Drawdown, Portfolio Allocation
+
+**Features:**
+- Drag and drop blocks onto canvas
+- Connect blocks via input/output ports
+- Configure each block's parameters
+- Auto-generate code from visual blocks
+- Save/Load strategies to localStorage
+- Export/Import strategies as JSON
+- Load pre-built templates:
+  - Golden Cross Strategy
+  - RSI Oversold Strategy
+  - MACD Crossover Strategy
+
+**Tabs:**
+- **Builder**: Visual block editor
+- **Code**: Auto-generated code view
+- **Settings**: Strategy configuration (name, market, timeframe, capital, etc.)
+
+#### 📊 Backtest Page (`/backtest`)
+Test your strategies against historical data:
+
+**Features:**
+- Load strategies saved from Studio
+- Configure backtest parameters:
+  - Start Date & End Date
+  - Initial Capital
+  - Commission Rate
+- Run backtest and view results:
+  - **Performance Tab**: Net Profit, Win Rate, Drawdown, Sharpe Ratio
+  - **Trades Tab**: Complete trade history with export to CSV
+  - **Metrics Tab**: Risk metrics (Max Drawdown, Volatility, Sortino, Calmar) and Performance metrics (Total Trades, Win/Loss Ratio, Avg Holding Time, Profit Factor)
+- Visual performance charts (Equity Curve)
+- Market data widget with real-time prices
+
+#### 💹 Trading Dashboard (`/trading`)
+Real-time market monitoring and analysis:
+
+**Features:**
+- Live market data from Binance API
+- Support for multiple cryptocurrencies: BTC, ETH, BNB, SOL, ADA
+- Real-time price updates (refreshes every 30 seconds)
+- 24h change percentage and volume
+- Technical indicators:
+  - Moving Averages (SMA 7, SMA 25)
+  - RSI (Relative Strength Index)
+  - MACD (Moving Average Convergence Divergence)
+- Interactive price charts with historical data
+- AI Strategy Advisor (requires OpenAI API key)
+- Market condition analysis
+
+#### 👛 Wallet Tracker (`/wallet-tracker`)
+Monitor Solana wallet addresses:
+
+**Features:**
+- Search and track Solana wallet addresses
+- View portfolio value and 24h changes
+- Monitor token holdings with individual values
+- View recent transaction history
+- Track multiple wallets (saved to localStorage)
+- Link to Solscan for detailed blockchain view
+- Copy wallet address to clipboard
+
+#### 👥 Community Page (`/community`)
+Community features and strategy sharing:
+
+**Features:**
+- Strategy Marketplace (UI preview)
+  - Browse shared trading strategies
+  - View ratings and download counts
+  - Filter by tags (Trend Following, Crypto, Volatility, etc.)
+- Leaderboard (UI preview)
+  - Top performing traders
+  - Monthly performance rankings
+- 3D network visualization of community connections
+
+#### 📖 Docs Page (`/docs`)
+Comprehensive platform documentation:
+
+**Sections:**
+- Getting Started: Connect wallet, create strategy, run backtest, deploy
+- Strategy Builder: Creating and configuring blocks
+- Backtesting: Testing strategies with historical data
+- Trading Dashboard: Monitoring real-time markets
+- Wallet Tracker: Tracking Solana wallets
+- Twitter Monitor: Monitoring Twitter accounts (feature documentation)
+
+#### 📄 Legal Pages
+- **Terms & Conditions** (`/terms`): Platform terms of service
+- **Privacy Policy** (`/privacy`): Data privacy and usage policies
+
+### Key Features Summary
+
+✅ **Fully Implemented:**
+- Strategy Builder (Studio) with drag-and-drop
+- Backtesting engine with comprehensive metrics
+- Real-time market data from Binance
+- Wallet tracking for Solana
+- Strategy templates
+- Save/Load/Export/Import strategies
+- Code generation from visual blocks
+
+⚠️ **UI Only (Demo):**
+- Community marketplace (shows sample strategies)
+- Leaderboard (shows sample rankings)
+- Twitter Monitor (UI exists, full functionality may require API setup)
+
+For more details, visit the [Docs page](/docs) in the application or check the [GitHub repository](https://github.com/AlgoterTrade/Algoter-Trade).
 
 ---
 
 ## 🏗️ Project Structure
 
 ```
-algoter-trading-platform/
+Algoter-Trade/
 ├── app/                          # Next.js 15 App Router
 │   ├── page.tsx                 # Home page
 │   ├── layout.tsx               # Root layout
@@ -244,7 +375,7 @@ algoter-trading-platform/
 │   ├── openai.ts                # OpenAI API integration
 │   ├── backtest-engine.ts       # Backtesting engine
 │   ├── indicators.ts            # Technical indicators
-│   ├── strategy-templates.ts    # Strategy templates
+│   ├── strategy-templates.ts     # Strategy templates
 │   ├── phantom-wallet.ts        # Phantom wallet integration
 │   └── utils.ts                 # Utility functions
 ├── public/                       # Static assets
@@ -378,3 +509,4 @@ Need help? We're here for you!
 ⭐ Star this repo if you find it helpful!
 
 </div>
+

@@ -65,16 +65,21 @@ export default function TermsPage() {
             </CardHeader>
             <CardContent>
               <p className="text-gray-300 leading-relaxed mb-4">
-                Algoter Trading provides a platform for algorithmic trading strategy development, backtesting, and execution. Our services include:
+                Algoter Trading provides a client-side web platform for algorithmic trading strategy development and backtesting. Our services include:
               </p>
               <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
-                <li>Strategy builder with visual drag-and-drop interface</li>
-                <li>Historical data backtesting capabilities</li>
-                <li>Real-time market data and technical analysis</li>
-                <li>Strategy sharing and community features</li>
-                <li>Integration with cryptocurrency exchanges</li>
-                <li>Wallet tracking and Twitter monitoring tools</li>
+                <li>Visual drag-and-drop strategy builder (Studio)</li>
+                <li>Historical data backtesting engine</li>
+                <li>Real-time market data from Binance API</li>
+                <li>Technical indicators and analysis tools</li>
+                <li>Solana wallet tracking (read-only, public data)</li>
+                <li>Strategy templates and code generation</li>
+                <li>Local strategy storage and export/import functionality</li>
+                <li>AI-powered strategy advisor (requires your own OpenAI API key)</li>
               </ul>
+              <p className="text-gray-300 leading-relaxed mt-4">
+                <strong className="text-teal-400">Note:</strong> This is a client-side application. All data is stored locally in your browser. We do not host user accounts or store your strategies on our servers.
+              </p>
             </CardContent>
           </Card>
 
@@ -84,14 +89,18 @@ export default function TermsPage() {
             </CardHeader>
             <CardContent>
               <p className="text-gray-300 leading-relaxed mb-4">
-                To use certain features of the Platform, you must connect a compatible cryptocurrency wallet (e.g., Phantom wallet). You are responsible for:
+                Wallet connection is optional and used for display purposes only. If you choose to connect a compatible cryptocurrency wallet (e.g., Phantom wallet), you are responsible for:
               </p>
               <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
                 <li>Maintaining the security of your wallet and private keys</li>
                 <li>All activities that occur under your wallet address</li>
-                <li>Ensuring your wallet is compatible with the Platform</li>
-                <li>Not sharing your wallet credentials with anyone</li>
+                <li>Ensuring your wallet extension is properly installed and secured</li>
+                <li>Never sharing your private keys, seed phrases, or wallet credentials</li>
+                <li>Understanding that we only access your public wallet address for display</li>
               </ul>
+              <p className="text-gray-300 leading-relaxed mt-4">
+                <strong className="text-teal-400">Important:</strong> We do not request, store, or have access to your private keys. Wallet connection is handled entirely by your wallet extension. You can disconnect your wallet at any time.
+              </p>
             </CardContent>
           </Card>
 
@@ -110,6 +119,10 @@ export default function TermsPage() {
                 <li>All trading decisions are your sole responsibility</li>
                 <li>Backtest results are hypothetical and may not reflect actual trading results</li>
                 <li>Market conditions can change rapidly and unpredictably</li>
+                <li>This Platform is for educational and research purposes only</li>
+                <li>We do not execute trades on your behalf - this is a strategy development tool</li>
+                <li>Real-time market data is provided by third-party APIs (Binance) and may have delays or inaccuracies</li>
+                <li>You are solely responsible for any trading decisions you make based on Platform analysis</li>
               </ul>
             </CardContent>
           </Card>
@@ -120,10 +133,13 @@ export default function TermsPage() {
             </CardHeader>
             <CardContent>
               <p className="text-gray-300 leading-relaxed mb-4">
-                The Platform, including its original content, features, and functionality, is owned by Algoter Trading and is protected by international copyright, trademark, patent, trade secret, and other intellectual property laws.
+                The Platform, including its original content, features, and functionality, is owned by Algoter Trading and is protected by international copyright, trademark, patent, trade secret, and other intellectual property laws. The source code is available on GitHub under the MIT License.
               </p>
               <p className="text-gray-300 leading-relaxed">
-                You retain ownership of strategies you create using the Platform. By sharing strategies publicly, you grant Algoter Trading a non-exclusive license to display, distribute, and use your strategies for Platform purposes.
+                You retain full ownership of strategies you create using the Platform. Strategies are stored locally in your browser and are private by default. You can export, share, or delete your strategies at any time. By exporting and sharing strategies, you understand that shared strategies become public information.
+              </p>
+              <p className="text-gray-300 leading-relaxed mt-4">
+                <strong className="text-teal-400">Open Source:</strong> This project is open source. You may use, modify, and distribute the code according to the MIT License terms.
               </p>
             </CardContent>
           </Card>
@@ -140,12 +156,15 @@ export default function TermsPage() {
                 <li>For any unlawful purpose or to solicit others to perform unlawful acts</li>
                 <li>To violate any international, federal, provincial, or state regulations, rules, laws, or local ordinances</li>
                 <li>To infringe upon or violate our intellectual property rights or the intellectual property rights of others</li>
-                <li>To harass, abuse, insult, harm, defame, slander, disparage, intimidate, or discriminate</li>
-                <li>To submit false or misleading information</li>
-                <li>To upload or transmit viruses or any other type of malicious code</li>
-                <li>To collect or track the personal information of others</li>
-                <li>To spam, phish, pharm, pretext, spider, crawl, or scrape</li>
+                <li>To attempt to access, modify, or interfere with the Platform's source code in malicious ways</li>
+                <li>To abuse third-party APIs (Binance, OpenAI) by making excessive requests</li>
+                <li>To use the Platform to execute unauthorized trades or financial fraud</li>
+                <li>To store or process illegal content through the Platform</li>
+                <li>To reverse engineer the Platform for malicious purposes (though open source, respect the license terms)</li>
               </ul>
+              <p className="text-gray-300 leading-relaxed mt-4">
+                <strong className="text-teal-400">API Usage:</strong> If you use third-party APIs (OpenAI, Binance), you are responsible for complying with their terms of service and usage limits.
+              </p>
             </CardContent>
           </Card>
 
@@ -159,10 +178,17 @@ export default function TermsPage() {
               </p>
               <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
                 <li>Your use or inability to use the Platform</li>
-                <li>Any conduct or content of third parties on the Platform</li>
-                <li>Any content obtained from the Platform</li>
-                <li>Unauthorized access, use, or alteration of your transmissions or content</li>
+                <li>Loss of data stored in browser localStorage (strategies, preferences)</li>
+                <li>Inaccurate or delayed market data from third-party APIs</li>
+                <li>Trading losses based on strategies created or backtested on the Platform</li>
+                <li>Security breaches affecting your browser or device</li>
+                <li>Third-party API failures or rate limiting (Binance, OpenAI)</li>
+                <li>Unauthorized access to your browser or localStorage</li>
+                <li>Any errors, bugs, or malfunctions in the Platform</li>
               </ul>
+              <p className="text-gray-300 leading-relaxed mt-4">
+                <strong className="text-red-400">Data Loss Warning:</strong> Since all data is stored locally, clearing browser data will permanently delete your strategies. We are not responsible for data loss. Always export your strategies as backups.
+              </p>
             </CardContent>
           </Card>
 
@@ -172,7 +198,15 @@ export default function TermsPage() {
             </CardHeader>
             <CardContent>
               <p className="text-gray-300 leading-relaxed">
-                We may terminate or suspend your account and bar access to the Platform immediately, without prior notice or liability, under our sole discretion, for any reason whatsoever and without limitation, including but not limited to a breach of the Terms. If you wish to terminate your account, you may simply discontinue using the Platform.
+                Since this is a client-side application without user accounts, there are no accounts to terminate. However, we reserve the right to:
+              </p>
+              <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4 mt-2">
+                <li>Modify or discontinue the Platform at any time</li>
+                <li>Block access to the Platform for users who violate these Terms</li>
+                <li>Update or change Platform features without notice</li>
+              </ul>
+              <p className="text-gray-300 leading-relaxed mt-4">
+                If you wish to stop using the Platform, simply discontinue use and clear your browser data. Export your strategies first if you want to keep them.
               </p>
             </CardContent>
           </Card>
@@ -199,6 +233,7 @@ export default function TermsPage() {
               <ul className="space-y-2 text-gray-300">
                 <li>Email: support@algotertrading.com</li>
                 <li>Twitter: <a href="https://x.com/algotertrade" target="_blank" rel="noopener noreferrer" className="text-teal-400 hover:underline">@algotertrade</a></li>
+                <li>GitHub: <a href="https://github.com/AlgoterTrade/Algoter-Trade" target="_blank" rel="noopener noreferrer" className="text-teal-400 hover:underline">AlgoterTrade/Algoter-Trade</a></li>
               </ul>
             </CardContent>
           </Card>
