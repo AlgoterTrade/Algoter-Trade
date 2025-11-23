@@ -497,14 +497,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🔗 Links
 
 - **Website**: [https://algoter.trade](https://algoter.trade)
-<<<<<<< HEAD
 - **GitHub**: [AlgoterTrade/Algoter-Trade](https://github.com/AlgoterTrade/Algoter-Trade)
 - **Twitter**: [@algotertrade](https://x.com/algotertrade)
 - **Documentation**: [https://algotertrading.com/docs](https://algotertrading.com/docs)
 =======
 - **Twitter**: [@algotertrade](https://x.com/algotertrade)
 - **GitHub**: [https://github.com/yourusername/algoter-trading-platform](https://github.com/yourusername/algoter-trading-platform)
->>>>>>> 84ab03cbf7b1f7f54b7aad13fa34cd13662bd8c6
 
 ---
 
