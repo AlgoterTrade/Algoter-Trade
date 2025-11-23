@@ -39,6 +39,7 @@ export default function WalletTrackerPage() {
   const [trackedWallets, setTrackedWallets] = useState<string[]>([])
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
     // Load tracked wallets from localStorage
     const saved = localStorage.getItem("tracked_wallets")
     if (saved) {
@@ -98,6 +99,7 @@ export default function WalletTrackerPage() {
   }
 
   const handleTrackWallet = () => {
+    if (typeof window === 'undefined') return
     if (!walletAddress.trim()) {
       toast.error("Please enter a wallet address")
       return
@@ -117,6 +119,7 @@ export default function WalletTrackerPage() {
   }
 
   const handleRemoveWallet = (address: string) => {
+    if (typeof window === 'undefined') return
     const updated = trackedWallets.filter(w => w !== address)
     setTrackedWallets(updated)
     localStorage.setItem("tracked_wallets", JSON.stringify(updated))

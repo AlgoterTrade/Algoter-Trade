@@ -2,18 +2,24 @@
 
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
+import dynamic from "next/dynamic"
 import { Button } from "@/components/ui/button"
-import { MainScene } from "@/components/main-scene"
+import { ErrorBoundary } from "@/components/error-boundary"
+
+const MainScene = dynamic(() => import("@/components/main-scene").then(mod => ({ default: mod.MainScene })), {
+  ssr: false,
+  loading: () => null
+})
 
 export default function Home() {
   const router = useRouter()
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Simulate loading assets
+    // Minimal loading time
     const timer = setTimeout(() => {
       setLoading(false)
-    }, 2000)
+    }, 500)
 
     return () => clearTimeout(timer)
   }, [])
@@ -29,9 +35,11 @@ export default function Home() {
         </div>
       ) : (
         <>
-          <div className="absolute inset-0 z-10">
-            <MainScene />
-          </div>
+          <ErrorBoundary>
+            <div className="absolute inset-0 z-10">
+              <MainScene />
+            </div>
+          </ErrorBoundary>
 
           <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-4 pointer-events-none">
             <div className="max-w-3xl text-center mb-8">
@@ -111,7 +119,11 @@ export default function Home() {
               <Button
                 variant="link"
                 className="text-white hover:text-teal-400 pointer-events-auto"
-                onClick={() => window.open("https://x.com/algotertrading", "_blank", "noopener,noreferrer")}
+                onClick={() => {
+                  if (typeof window !== 'undefined') {
+                    window.open("https://x.com/algotertrade", "_blank", "noopener,noreferrer")
+                  }
+                }}
               >
                 <svg className="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />

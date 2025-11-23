@@ -225,6 +225,7 @@ function initialize() {
   }
 
   const saveStrategy = () => {
+    if (typeof window === 'undefined') return
     const strategy = {
       blocks: canvasBlocks,
       settings,
@@ -235,6 +236,7 @@ function initialize() {
   }
 
   const loadStrategy = () => {
+    if (typeof window === 'undefined') return
     const saved = localStorage.getItem("algoSensei_strategy")
     if (saved) {
       const strategy = JSON.parse(saved)
@@ -261,6 +263,7 @@ function initialize() {
   }
 
   const exportStrategy = () => {
+    if (typeof window === 'undefined') return
     const strategy = {
       blocks: canvasBlocks,
       settings,
@@ -281,6 +284,7 @@ function initialize() {
   }
 
   const importStrategy = () => {
+    if (typeof window === 'undefined') return
     const input = document.createElement("input")
     input.type = "file"
     input.accept = "application/json"

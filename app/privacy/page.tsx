@@ -304,7 +304,7 @@ export default function PrivacyPage() {
               </p>
               <ul className="space-y-2 text-gray-300">
                 <li>Email: privacy@algotertrading.com</li>
-                <li>Twitter: <a href="https://x.com/algotertrading" target="_blank" rel="noopener noreferrer" className="text-teal-400 hover:underline">@algotertrading</a></li>
+                <li>Twitter: <a href="https://x.com/algotertrade" target="_blank" rel="noopener noreferrer" className="text-teal-400 hover:underline">@algotertrade</a></li>
               </ul>
             </CardContent>
           </Card>

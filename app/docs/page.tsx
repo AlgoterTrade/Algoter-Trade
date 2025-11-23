@@ -223,9 +223,11 @@ export default function DocsPage() {
                 key={section.id}
                 className="bg-black/80 border-teal-500/30 backdrop-blur-md hover:border-teal-500 transition-colors cursor-pointer"
                 onClick={() => {
-                  const element = document.getElementById(section.id)
-                  if (element) {
-                    element.scrollIntoView({ behavior: "smooth" })
+                  if (typeof document !== 'undefined') {
+                    const element = document.getElementById(section.id)
+                    if (element) {
+                      element.scrollIntoView({ behavior: "smooth" })
+                    }
                   }
                 }}
               >
@@ -367,48 +369,6 @@ export default function DocsPage() {
             </Card>
           </div>
 
-          {/* Footer */}
-          <div className="text-center text-gray-400 text-sm mb-8">
-            <p>Need more help? Join our community or follow us on social media.</p>
-            <div className="flex justify-center gap-4 mt-4">
-              <Button
-                variant="outline"
-                size="sm"
-                className="border-teal-500 text-teal-500 hover:bg-teal-900/20"
-                onClick={() => router.push("/community")}
-              >
-                Community
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                className="border-teal-500 text-teal-500 hover:bg-teal-900/20"
-                onClick={() => window.open("https://x.com/algotertrading", "_blank", "noopener,noreferrer")}
-              >
-                <svg className="h-4 w-4 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                </svg>
-                Follow on X
-              </Button>
-            </div>
-            <div className="flex justify-center gap-4 mt-6 text-xs">
-              <Button
-                variant="link"
-                className="text-gray-500 hover:text-teal-400 p-0 h-auto"
-                onClick={() => router.push("/terms")}
-              >
-                Terms & Conditions
-              </Button>
-              <span className="text-gray-600">•</span>
-              <Button
-                variant="link"
-                className="text-gray-500 hover:text-teal-400 p-0 h-auto"
-                onClick={() => router.push("/privacy")}
-              >
-                Privacy Policy
-              </Button>
-            </div>
-          </div>
         </div>
       </div>
     </main>

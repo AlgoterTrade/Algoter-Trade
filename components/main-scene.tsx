@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from "react"
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
-import { Environment, OrbitControls, Float, Sphere, MeshDistortMaterial } from "@react-three/drei"
+import { OrbitControls, Float, Sphere, MeshDistortMaterial } from "@react-three/drei"
 import type { Group } from "three"
 
 export function MainScene() {
@@ -10,8 +10,9 @@ export function MainScene() {
     <Canvas camera={{ position: [0, 0, 15], fov: 60 }}>
       <color attach="background" args={["#050505"]} />
       <fog attach="fog" args={["#050505", 10, 40]} />
-      <ambientLight intensity={0.2} />
-      <Environment preset="city" />
+      <ambientLight intensity={0.4} />
+      <directionalLight position={[10, 10, 5]} intensity={0.6} />
+      <directionalLight position={[-10, -10, -5]} intensity={0.4} />
 
       <OrbitControls
         enableZoom={false}
