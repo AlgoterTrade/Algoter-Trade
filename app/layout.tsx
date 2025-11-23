@@ -7,7 +7,16 @@ export const metadata = {
   title: "Algoter Trading - No-Code Trading Strategy Builder",
   description:
     "Build, backtest, and deploy algorithmic trading strategies with AI-powered simplicity. No coding required.",
-    generator: 'v0.app'
+  generator: 'v0.app',
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/icon.svg', type: 'image/svg+xml', sizes: 'any' }
+    ],
+    apple: [
+      { url: '/apple-icon.svg', type: 'image/svg+xml' }
+    ]
+  }
 }
 
 export default function RootLayout({
