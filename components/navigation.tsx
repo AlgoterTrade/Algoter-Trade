@@ -10,14 +10,16 @@ export function Navigation() {
 
   return (
     <>
-      <Button
-        variant="ghost"
-        className="absolute top-4 left-4 z-20 text-white hover:text-teal-400 hover:bg-transparent"
-        onClick={() => router.push("/")}
-      >
-        <ArrowLeft className="mr-2 h-4 w-4" />
-        Back to Home
-      </Button>
+      {pathname !== "/studio" && (
+        <Button
+          variant="ghost"
+          className="absolute top-4 left-4 z-20 text-white hover:text-teal-400 hover:bg-transparent"
+          onClick={() => router.push("/")}
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back to Home
+        </Button>
+      )}
 
       <div className="absolute bottom-8 left-0 right-0 z-20 flex justify-center">
         <div className="bg-black/50 backdrop-blur-md border border-gray-800 rounded-full px-2 py-1">

@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { BarChart2, ChevronDown, Code, Cpu, Filter, GitBranch, Play, Plus, Save, Settings, Sliders, X, Trash2, Edit2, Download, Upload } from "lucide-react"
+import { BarChart2, ChevronDown, Code, Cpu, Filter, GitBranch, Play, Plus, Save, Settings, Sliders, X, Trash2, Edit2, Download, Upload, ArrowLeft } from "lucide-react"
 import { Navigation } from "@/components/navigation"
 import { AiAssistant } from "@/components/ai-assistant"
 import { STRATEGY_TEMPLATES } from "@/lib/strategy-templates"
@@ -378,7 +378,7 @@ function initialize() {
               <DialogTrigger asChild>
                 <Button
                   variant="outline"
-                  className="border-teal-500 text-teal-500 hover:bg-teal-900/20"
+                  className="border-teal-500 text-teal-500 hover:bg-teal-900/20 mr-2"
                 >
                   <GitBranch className="mr-2 h-4 w-4" />
                   Load Template
@@ -420,6 +420,14 @@ function initialize() {
                 </div>
               </DialogContent>
             </Dialog>
+            <Button
+              variant="outline"
+              className="border-teal-500 text-teal-500 hover:bg-teal-900/20"
+              onClick={() => router.push("/")}
+            >
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Home
+            </Button>
           </div>
           <div className="flex items-center">
             <Button
