@@ -7,8 +7,8 @@ import { Environment, Float } from "@react-three/drei"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { LoginBackground } from "@/components/login-background"
-import { ArrowLeft, Wallet, Check } from "lucide-react"
-import { connectPhantom, disconnectPhantom, isPhantomInstalled, formatWalletAddress, getPhantomConnection } from "@/lib/phantom-wallet"
+import { ArrowLeft, Wallet, Check, Coins, ArrowUpRight } from "lucide-react"
+import { connectPhantom, disconnectPhantom, isPhantomInstalled, formatWalletAddress, getPhantomConnection, getSolBalance, requestWithdrawal } from "@/lib/phantom-wallet"
 import { toast } from "sonner"
 
 export default function LoginPage() {
@@ -16,6 +16,9 @@ export default function LoginPage() {
   const [walletAddress, setWalletAddress] = useState<string | null>(null)
   const [isConnecting, setIsConnecting] = useState(false)
   const [phantomInstalled, setPhantomInstalled] = useState(false)
+  const [solBalance, setSolBalance] = useState<number | null>(null)
+  const [isLoadingBalance, setIsLoadingBalance] = useState(false)
+  const [isWithdrawing, setIsWithdrawing] = useState(false)
 
   // Check if Phantom is installed
   useEffect(() => {
@@ -27,10 +30,12 @@ export default function LoginPage() {
       if (connection.isConnected && connection.publicKey) {
         setWalletAddress(connection.publicKey)
         localStorage.setItem("phantom_wallet_address", connection.publicKey)
+        fetchSolBalance(connection.publicKey)
       } else {
         const savedAddress = localStorage.getItem("phantom_wallet_address")
         if (savedAddress) {
           setWalletAddress(savedAddress)
+          fetchSolBalance(savedAddress)
         }
       }
 
@@ -41,9 +46,11 @@ export default function LoginPage() {
             const address = publicKey.toBase58()
             setWalletAddress(address)
             localStorage.setItem("phantom_wallet_address", address)
+            fetchSolBalance(address)
             toast.success("Wallet connected!")
           } else {
             setWalletAddress(null)
+            setSolBalance(null)
             localStorage.removeItem("phantom_wallet_address")
             toast.info("Wallet disconnected")
           }
@@ -53,6 +60,7 @@ export default function LoginPage() {
         window.solana.on("connect", handleAccountChange)
         window.solana.on("disconnect", () => {
           setWalletAddress(null)
+          setSolBalance(null)
           localStorage.removeItem("phantom_wallet_address")
           toast.info("Wallet disconnected")
         })
@@ -68,6 +76,20 @@ export default function LoginPage() {
     }
   }, [])
 
+  const fetchSolBalance = async (address: string) => {
+    setIsLoadingBalance(true)
+    try {
+      const balance = await getSolBalance(address)
+      setSolBalance(balance)
+    } catch (error: any) {
+      console.error("Error fetching SOL balance:", error)
+      // Don't show error toast, just set balance to null
+      setSolBalance(null)
+    } finally {
+      setIsLoadingBalance(false)
+    }
+  }
+
   const handleConnectWallet = async () => {
     if (!phantomInstalled) {
       toast.error("Phantom wallet is not installed. Please install it from https://phantom.app")
@@ -80,6 +102,7 @@ export default function LoginPage() {
       const { publicKey } = await connectPhantom()
       setWalletAddress(publicKey)
       localStorage.setItem("phantom_wallet_address", publicKey)
+      await fetchSolBalance(publicKey)
       toast.success("Wallet connected successfully!")
       setTimeout(() => {
         router.push("/studio")
@@ -96,11 +119,31 @@ export default function LoginPage() {
     try {
       await disconnectPhantom()
       setWalletAddress(null)
+      setSolBalance(null)
       localStorage.removeItem("phantom_wallet_address")
       toast.success("Wallet disconnected")
     } catch (error: any) {
       console.error("Error disconnecting wallet:", error)
       toast.error("Failed to disconnect wallet")
+    }
+  }
+
+  const handleWithdraw = async () => {
+    if (!walletAddress || !solBalance || solBalance <= 0) {
+      toast.error("No SOL available to withdraw")
+      return
+    }
+
+    setIsWithdrawing(true)
+    try {
+      // Open Phantom wallet for withdrawal
+      // In a real implementation, this would create a transaction
+      toast.info("Please use your Phantom wallet extension to send SOL. Click the Phantom icon in your browser.")
+    } catch (error: any) {
+      console.error("Error initiating withdrawal:", error)
+      toast.error(error.message || "Failed to initiate withdrawal")
+    } finally {
+      setIsWithdrawing(false)
     }
   }
 
@@ -165,6 +208,38 @@ export default function LoginPage() {
                 <div className="text-sm text-gray-300 font-mono mb-4 text-center">
                   {formatWalletAddress(walletAddress)}
                 </div>
+                
+                {/* SOL Balance Display */}
+                <div className="bg-gray-900/50 rounded-lg p-4 mb-4 border border-gray-700">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <Coins className="h-5 w-5 text-teal-500" />
+                      <div>
+                        <div className="text-xs text-gray-400 mb-1">Balance</div>
+                        <div className="text-lg font-bold text-white">
+                          {isLoadingBalance ? (
+                            <span className="text-gray-400">Loading...</span>
+                          ) : solBalance !== null ? (
+                            `${solBalance.toFixed(4)} SOL`
+                          ) : (
+                            <span className="text-gray-400">Unable to load</span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="border-teal-500/50 text-teal-400 hover:bg-teal-900/20"
+                      onClick={handleWithdraw}
+                      disabled={isWithdrawing || !solBalance || solBalance <= 0}
+                    >
+                      <ArrowUpRight className="h-4 w-4 mr-1" />
+                      Withdraw
+                    </Button>
+                  </div>
+                </div>
+
                 <Button
                   type="button"
                   className="w-full bg-teal-500 hover:bg-teal-600 text-black font-bold"

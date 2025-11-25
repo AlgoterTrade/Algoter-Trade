@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState, useCallback } from "react"
+import { useRef, useState, useCallback, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Canvas, useFrame } from "@react-three/fiber"
 import { Environment, Float, Html } from "@react-three/drei"
@@ -15,7 +15,7 @@ import { Badge } from "@/components/ui/badge"
 import { BarChart2, ChevronDown, Code, Cpu, Filter, GitBranch, Play, Plus, Save, Settings, Sliders, X, Trash2, Edit2, Download, Upload, ArrowLeft } from "lucide-react"
 import { Navigation } from "@/components/navigation"
 import { AiAssistant } from "@/components/ai-assistant"
-import { STRATEGY_TEMPLATES } from "@/lib/strategy-templates"
+import { STRATEGY_TEMPLATES, getTemplateDownloads, incrementTemplateDownload } from "@/lib/strategy-templates"
 import { toast } from "sonner"
 
 // Types
@@ -71,6 +71,7 @@ export default function StudioPage() {
   const [canvasBlocks, setCanvasBlocks] = useState<StrategyBlock[]>([])
   const [activeId, setActiveId] = useState<string | null>(null)
   const [editingBlock, setEditingBlock] = useState<StrategyBlock | null>(null)
+  const [templateDownloads, setTemplateDownloads] = useState<Record<string, number>>({})
   const [settings, setSettings] = useState<StrategySettings>({
     name: "Golden Cross with RSI Filter",
     market: "Crypto",
@@ -80,6 +81,17 @@ export default function StudioPage() {
     backtestEnd: "Dec 31, 2025",
     commission: "0.1%",
   })
+
+  // Load download counts on mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const downloads: Record<string, number> = {}
+      STRATEGY_TEMPLATES.forEach(template => {
+        downloads[template.id] = getTemplateDownloads(template.id)
+      })
+      setTemplateDownloads(downloads)
+    }
+  }, [])
 
   const handleDragStart = (event: any) => {
     setActiveId(event.active.id)
@@ -389,34 +401,53 @@ function initialize() {
                   <DialogTitle className="text-white">Strategy Templates</DialogTitle>
                 </DialogHeader>
                 <div className="space-y-3 max-h-96 overflow-y-auto">
-                  {STRATEGY_TEMPLATES.map((template) => (
-                    <Card
-                      key={template.id}
-                      className="bg-gray-900/50 border-teal-500/30 cursor-pointer hover:border-teal-500 transition-colors"
-                      onClick={() => {
-                        setCanvasBlocks(template.blocks.map(block => ({
-                          ...block,
-                          position: block.position || { x: 0, y: 0 }
-                        })))
-                        setSettings(template.settings)
-                        toast.success(`Loaded template: ${template.name}`)
-                      }}
-                    >
-                      <CardHeader>
-                        <CardTitle className="text-white text-lg">{template.name}</CardTitle>
-                        <CardDescription className="text-gray-400">{template.description}</CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="flex flex-wrap gap-2">
-                          {template.blocks.map((block) => (
-                            <Badge key={block.id} variant="outline" className="border-teal-500/30 text-teal-400">
-                              {block.title}
-                            </Badge>
-                          ))}
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
+                  {STRATEGY_TEMPLATES.map((template) => {
+                    const downloadCount = templateDownloads[template.id] || 0
+                    return (
+                      <Card
+                        key={template.id}
+                        className="bg-gray-900/50 border-teal-500/30 cursor-pointer hover:border-teal-500 transition-colors"
+                        onClick={() => {
+                          setCanvasBlocks(template.blocks.map(block => ({
+                            ...block,
+                            position: block.position || { x: 0, y: 0 }
+                          })))
+                          setSettings(template.settings)
+                          // Increment download count
+                          const newCount = incrementTemplateDownload(template.id)
+                          setTemplateDownloads(prev => ({
+                            ...prev,
+                            [template.id]: newCount
+                          }))
+                          toast.success(`Loaded template: ${template.name}`)
+                        }}
+                      >
+                        <CardHeader>
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                              <CardTitle className="text-white text-lg">{template.name}</CardTitle>
+                              <CardDescription className="text-gray-400">{template.description}</CardDescription>
+                            </div>
+                            <div className="text-right ml-4">
+                              <div className="text-teal-400 text-sm font-medium flex items-center gap-1">
+                                <Download className="h-3 w-3" />
+                                {downloadCount} downloads
+                              </div>
+                            </div>
+                          </div>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="flex flex-wrap gap-2">
+                            {template.blocks.map((block) => (
+                              <Badge key={block.id} variant="outline" className="border-teal-500/30 text-teal-400">
+                                {block.title}
+                              </Badge>
+                            ))}
+                          </div>
+                        </CardContent>
+                      </Card>
+                    )
+                  })}
                 </div>
               </DialogContent>
             </Dialog>

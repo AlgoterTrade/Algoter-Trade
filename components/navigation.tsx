@@ -2,7 +2,7 @@
 
 import { useRouter, usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, BarChart2, Home, Layers, Network, TrendingUp, Users, Wallet, Book } from "lucide-react"
+import { ArrowLeft, BarChart2, Home, Layers, Network, TrendingUp, Users, Wallet, Book, Coins } from "lucide-react"
 
 export function Navigation() {
   const router = useRouter()
@@ -47,6 +47,12 @@ export function Navigation() {
               label="Trading"
               onClick={() => router.push("/trading")}
               active={pathname === "/trading"}
+            />
+            <NavButton
+              icon={<Coins className="h-5 w-5" />}
+              label="Prediction"
+              onClick={() => router.push("/prediction")}
+              active={pathname === "/prediction"}
             />
             <NavButton
               icon={<Users className="h-5 w-5" />}

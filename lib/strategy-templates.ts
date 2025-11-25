@@ -4,6 +4,7 @@ export interface StrategyTemplate {
   id: string
   name: string
   description: string
+  downloads?: number
   blocks: Array<{
     id: string
     type: "indicator" | "condition" | "action" | "risk"
@@ -23,11 +24,28 @@ export interface StrategyTemplate {
   }
 }
 
+// Helper function to get download count from localStorage
+export function getTemplateDownloads(templateId: string): number {
+  if (typeof window === 'undefined') return 0
+  const downloads = localStorage.getItem(`template_downloads_${templateId}`)
+  return downloads ? parseInt(downloads, 10) : 0
+}
+
+// Helper function to increment download count
+export function incrementTemplateDownload(templateId: string): number {
+  if (typeof window === 'undefined') return 0
+  const current = getTemplateDownloads(templateId)
+  const newCount = current + 1
+  localStorage.setItem(`template_downloads_${templateId}`, newCount.toString())
+  return newCount
+}
+
 export const STRATEGY_TEMPLATES: StrategyTemplate[] = [
   {
     id: "golden-cross",
     name: "Golden Cross Strategy",
     description: "A classic trend-following strategy using moving average crossovers",
+    downloads: 0,
     blocks: [
       {
         id: "ma-fast",
@@ -76,6 +94,7 @@ export const STRATEGY_TEMPLATES: StrategyTemplate[] = [
     id: "rsi-oversold",
     name: "RSI Oversold Strategy",
     description: "Buy when RSI indicates oversold conditions",
+    downloads: 0,
     blocks: [
       {
         id: "rsi",
@@ -124,6 +143,7 @@ export const STRATEGY_TEMPLATES: StrategyTemplate[] = [
     id: "macd-crossover",
     name: "MACD Crossover Strategy",
     description: "Trade on MACD line crossovers with signal line",
+    downloads: 0,
     blocks: [
       {
         id: "macd",
